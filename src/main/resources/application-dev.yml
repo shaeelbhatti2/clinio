@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/clinio}
+    username: ${SPRING_DATASOURCE_USERNAME:clinio}
+    password: ${SPRING_DATASOURCE_PASSWORD:clinio}
+  mail:
+    host: ${SPRING_MAIL_HOST:localhost}
+    port: ${SPRING_MAIL_PORT:1025}
+
+logging:
+  level:
+    com.clinio: INFO
