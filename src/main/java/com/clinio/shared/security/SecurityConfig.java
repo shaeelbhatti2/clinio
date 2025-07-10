@@ -30,6 +30,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/health", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**",
                                 "/api/auth/**")
                         .permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/billing/**").hasAnyRole("ADMIN", "BILLING", "RECEPTIONIST")
+                        .requestMatchers("/api/clinical/**").hasAnyRole("ADMIN", "PROVIDER", "NURSE")
                         .anyRequest()
                         .authenticated());
         return http.build();
@@ -39,7 +42,7 @@ public class SecurityConfig {
     DaoAuthenticationProvider daoAuthenticationProvider() {
         var provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder());
+        provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
 }
