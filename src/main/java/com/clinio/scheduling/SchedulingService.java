@@ -125,4 +125,8 @@ public class SchedulingService {
                 entity.getDurationMinutes(),
                 entity.getStatus());
     }
+
+    public AppointmentResponse toPublicResponse(AppointmentEntity entity) {
+        return toResponse(entity);
+    }
 }
